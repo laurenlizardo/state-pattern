@@ -1,0 +1,13 @@
+C:\Users\Lauren\Projects\state-pattern\bin\Debug\netcoreapp3.1\state-pattern.exe
+C:\Users\Lauren\Projects\state-pattern\bin\Debug\netcoreapp3.1\state-pattern.deps.json
+C:\Users\Lauren\Projects\state-pattern\bin\Debug\netcoreapp3.1\state-pattern.runtimeconfig.json
+C:\Users\Lauren\Projects\state-pattern\bin\Debug\netcoreapp3.1\state-pattern.runtimeconfig.dev.json
+C:\Users\Lauren\Projects\state-pattern\bin\Debug\netcoreapp3.1\state-pattern.dll
+C:\Users\Lauren\Projects\state-pattern\bin\Debug\netcoreapp3.1\state-pattern.pdb
+C:\Users\Lauren\Projects\state-pattern\obj\Debug\netcoreapp3.1\state-pattern.csprojAssemblyReference.cache
+C:\Users\Lauren\Projects\state-pattern\obj\Debug\netcoreapp3.1\state-pattern.csproj.CoreCompileInputs.cache
+C:\Users\Lauren\Projects\state-pattern\obj\Debug\netcoreapp3.1\state-pattern.AssemblyInfoInputs.cache
+C:\Users\Lauren\Projects\state-pattern\obj\Debug\netcoreapp3.1\state-pattern.AssemblyInfo.cs
+C:\Users\Lauren\Projects\state-pattern\obj\Debug\netcoreapp3.1\state-pattern.dll
+C:\Users\Lauren\Projects\state-pattern\obj\Debug\netcoreapp3.1\state-pattern.pdb
+C:\Users\Lauren\Projects\state-pattern\obj\Debug\netcoreapp3.1\state-pattern.genruntimeconfig.cache
