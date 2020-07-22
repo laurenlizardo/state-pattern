@@ -1,0 +1,6 @@
+# Ignore the Visual Code stuff
+
+.vscode
+/bin
+/obj
+*.csproj
