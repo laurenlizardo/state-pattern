@@ -1,9 +1,16 @@
 using System;
+using System.Collections;
 
 public class Dog
 {
     // Public Fields
     public string Name;
+
+    // Basic Statistics
+    public BasicStatistic Health = new BasicStatistic (10 );
+    public BasicStatistic Hunger = new BasicStatistic( 10 );
+    public BasicStatistic Thirst = new BasicStatistic( 10 );
+    public BasicStatistic WalkSpeed = new BasicStatistic( 5 );
 
     // States
     private StateMachine _stateMachine;
@@ -18,6 +25,17 @@ public class Dog
     {
         _stateMachine = new StateMachine();
         _stateMachine.SetState( new Idle() );
+
+        Update();
+    }
+
+    private void Update()
+    {
+        while( true )
+        {
+            Hunger.Deplete( .5f );
+            Thirst.Deplete( .1f );
+        }
     }
 }
 
@@ -55,4 +73,21 @@ public class Sleep : IState
     public void Tick() { }
     public void OnEnter() { }
     public void OnExit() { }
+}
+
+public class Statistic { }
+public class BasicStatistic : Statistic
+{
+    // Constructors
+    public BasicStatistic() { }
+    public BasicStatistic( float value ) { Value = value; }
+
+    // Fields and Properties
+    public float Value;
+
+    // Methods
+    public void Deplete( float depletionSpeed )
+    {
+        Value -= depletionSpeed * Time.time;
+    }
 }
