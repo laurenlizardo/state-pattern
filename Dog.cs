@@ -7,10 +7,9 @@ public class Dog
     public string Name;
 
     // Basic Statistics
-    public BasicStatistic Health = new BasicStatistic (10 );
+    public BasicStatistic Health = new BasicStatistic( 10 );
     public BasicStatistic Hunger = new BasicStatistic( 10 );
     public BasicStatistic Thirst = new BasicStatistic( 10 );
-    public BasicStatistic WalkSpeed = new BasicStatistic( 5 );
 
     // States
     private StateMachine _stateMachine;
@@ -20,13 +19,18 @@ public class Dog
     public Dog() { }
     public Dog( string name ) { Name = name; }
 
+    // Events
+    public Action OnGameStart;
+
     // Methods
     public virtual void Initialize()
     {
         _stateMachine = new StateMachine();
         _stateMachine.SetState( new Idle() );
 
-        Update();
+        OnGameStart += Update;
+
+        if ( OnGameStart != null ) OnGameStart();
     }
 
     private void Update()
@@ -35,41 +39,48 @@ public class Dog
         {
             Hunger.Deplete( .5f );
             Thirst.Deplete( .1f );
+
+            if ( Hunger.GetCurrentValue() <= 0 || Thirst.GetCurrentValue() <= 0)
+            {
+                Health.Deplete(.1f);
+            }
         }
     }
 }
 
 public class Idle : IState
 {
+    // Constructors
     public Idle() : base() { }
-
+    
+    // Interface Members
     public void Tick() { }
     public void OnEnter() { }
     public void OnExit() { }
 }
 
-public class Walk : IState
+public class Eating : IState
 {
-    public Walk() : base() { }
+    public BasicStatistic HungerStat;
 
-    public void Tick() { }
+    // Constructors
+    public Eating() : base() { }
+
+    // Interface Members
+    public void Tick()
+    {
+        while ( HungerStat.GetMaxValue() < HungerStat.CurrentValue ) HungerStat.Increase( .1f );
+    }
     public void OnEnter() { }
     public void OnExit() { }
 }
 
-public class Eat : IState
+public class Drinking : IState
 {
-    public Eat() : base() { }
+    // Constructors
+    public Drinking() : base() { }
 
-    public void Tick() { }
-    public void OnEnter() { }
-    public void OnExit() { }
-}
-
-public class Sleep : IState
-{
-    public Sleep() : base() { }
-
+    // Interface Members
     public void Tick() { }
     public void OnEnter() { }
     public void OnExit() { }
@@ -80,14 +91,35 @@ public class BasicStatistic : Statistic
 {
     // Constructors
     public BasicStatistic() { }
-    public BasicStatistic( float value ) { Value = value; }
+    public BasicStatistic( float value ) { _maxValue = value; }
 
     // Fields and Properties
-    public float Value;
+    private float _maxValue;
+    public float CurrentValue { get { return _maxValue; } set { CurrentValue = value; } }
 
     // Methods
+    public void SetValue( float value )
+    {
+        CurrentValue = value;
+    }
+
+    public float GetMaxValue()
+    {
+        return _maxValue;
+    }
+
+    public float GetCurrentValue()
+    {
+        return CurrentValue;
+    }
+
     public void Deplete( float depletionSpeed )
     {
-        Value -= depletionSpeed * Time.time;
+        CurrentValue -= depletionSpeed;
+    }
+
+    public void Increase( float increaseSpeed )
+    {
+        CurrentValue += increaseSpeed;
     }
 }
